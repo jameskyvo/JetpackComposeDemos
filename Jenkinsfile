@@ -40,12 +40,13 @@ pipeline {
             steps {
                 bat "${GRADLE} assembleDebug"
             }
-        }
-        post {
-            success {
-                archiveArtirfacts artifacts: 'app/build/outputs/apk/debug/*.apk', fingerprint: true
+            post {
+                success {
+                    archiveArtirfacts artifacts: 'app/build/outputs/apk/debug/*.apk', fingerprint: true
+                }
             }
         }
+
     }
 
     post {
