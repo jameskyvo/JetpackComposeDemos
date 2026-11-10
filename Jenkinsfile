@@ -34,10 +34,10 @@ pipeline {
                 catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
                     bat "${GRADLE} testDebugUnitTest"
                 }
-                post {
-                    always {
-                        junit testResults: 'app/build/test-results/testDebugUnitTest/*.xml', allowEmptyResults: false
-                    }
+            }
+            post {
+                always {
+                    junit testResults: 'app/build/test-results/testDebugUnitTest/*.xml', allowEmptyResults: false
                 }
             }
         }
