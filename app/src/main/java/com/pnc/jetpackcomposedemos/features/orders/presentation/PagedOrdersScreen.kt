@@ -43,7 +43,7 @@ private fun errorText(error: Throwable): String =
     }
 
 @Composable
-fun pagedOrdersScreen(
+fun PagedOrdersScreen(
     useTwoPaneLayout: Boolean,
     viewModel: PagedOrdersViewModel = hiltViewModel()
 ) {
