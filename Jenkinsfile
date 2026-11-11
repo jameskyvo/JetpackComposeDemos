@@ -31,22 +31,25 @@ pipeline {
         }
 
 		stage('Static analysis') {
-			bat "${GRADLE} detekt ktlintCheck"
-		} post {
-			always {
-				recordIssues enabledForFailure: true,
+			steps {
+				bat "${GRADLE} detekt ktlintCheck"
+			}
+			post {
+				always {
+					recordIssues enabledForFailure: true,
 					tool: checkStyle(id: 'detekt',
-									name: 'detekt',
-									pattern: 'app/build/reports/detekt/detekt.xml'
+						name: 'detekt',
+						pattern: 'app/build/reports/detekt/detekt.xml'
 					),
-				qualityGates: [[threshold: 1, type: 'NEW', unstable: true]]
+					qualityGates: [[threshold: 1, type: 'NEW', unstable: true]]
 
-				recordIssues enabledForFailure: true,
+					recordIssues enabledForFailure: true,
 					tool: checkStyle(id: 'ktlint',
-									name: 'ktlint',
-									pattern: 'app/build/reports/ktlint/**/*.xml'
-				),
-				qualityGates: [[threshold: 1. type: 'NEW', unstable: true]]
+						name: 'ktlint',
+						pattern: 'app/build/reports/ktlint/**/*.xml'
+					),
+					qualityGates: [[threshold: 1, type: 'NEW', unstable: true]]
+				}
 			}
 		}
 
