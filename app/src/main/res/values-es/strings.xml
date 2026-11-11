@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">JetpackComposeDemos</string>
-    
+
     <!-- Common -->
     <string name="common_add">Agregar</string>
     <string name="common_clear">Borrar</string>

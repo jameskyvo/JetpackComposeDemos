@@ -33,7 +33,7 @@ import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 
 @HiltAndroidApp
-class EventPlannerApplication: Application()
+class EventPlannerApplication : Application()
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -72,12 +72,12 @@ class MainActivity : ComponentActivity() {
             // from system theme when the activity was created
             // now that our apps settings might disagree with system
             // set them again whenever the chosen theme changes
-            DisposableEffect(darkTheme){
+            DisposableEffect(darkTheme) {
                 enableEdgeToEdge(
                     statusBarStyle = SystemBarStyle.auto(
-                    lightScrim = android.graphics.Color.TRANSPARENT,
-                    darkScrim = android.graphics.Color.TRANSPARENT
-                ) { darkTheme },
+                        lightScrim = android.graphics.Color.TRANSPARENT,
+                        darkScrim = android.graphics.Color.TRANSPARENT
+                    ) { darkTheme },
                     navigationBarStyle = SystemBarStyle.auto(
                         lightScrim = LIGHT_SCRIM,
                         darkScrim = DARK_SCRIM
