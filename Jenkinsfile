@@ -29,6 +29,27 @@ pipeline {
                 bat "${GRADLE} --version"
             }
         }
+
+		stage('Static analysis') {
+			bat "${GRADLE} detekt ktlintCheck"
+		} post {
+			always {
+				recordIssues enabledForFailure: true,
+					tool: checkStyle(id: 'detekt',
+									name: 'detekt',
+									pattern: 'app/build/reports/detekt/detekt.xml'
+					),
+				qualityGates: [[threshold: 1, type: 'NEW', unstable: true]]
+
+				recordIssues enabledForFailure: true,
+					tool: checkStyle(id: 'ktlint',
+									name: 'ktlint',
+									pattern: 'app/build/reports/ktlint/**/*.xml'
+				),
+				qualityGates: [[threshold: 1. type: 'NEW', unstable: true]]
+			}
+		}
+
         stage('Android Lint') {
             steps {
                 bat"${GRADLE} lintDebug"
