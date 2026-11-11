@@ -65,6 +65,22 @@ pipeline {
             }
         }
 
+		stage('Coverage'){
+			steps {
+				bat "${GRADLE} createDebugUnitTestCoverageReport"
+				bat bat 'powershell -NoProfile -ExecutionPolicy Bypass -File ci\\coverage-gate.ps1 -Report app/build/reports/coverage/test/debug/report.xml -Min 10'
+			}
+			post {
+				always {
+					recordCoverage(
+						tools: [[parser: 'JACOCO', pattern:
+						'app/build/reports/coverage/test/debug/report.xml']],
+					sourceCodeRetention: 'NEVER'
+					)
+				}
+			}
+		}
+
         stage('Unit Tests') {
             steps {
                 catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
