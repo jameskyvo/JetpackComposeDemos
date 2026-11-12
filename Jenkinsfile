@@ -33,7 +33,7 @@ pipeline {
 		stage('Verify') {
 			steps {
 				catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE') {
-					bat "${GRADLE} -- continue lintDebug detekt ktlintCheck testDebugUnitTest createDebugUnitTestCoverageReport"
+					bat "${GRADLE} --continue lintDebug detekt ktlintCheck testDebugUnitTest createDebugUnitTestCoverageReport"
 				}
 			}
 		}
