@@ -73,12 +73,14 @@ pipeline {
 				}
 
 				stage('Coverage') {
-					bat 'powershell -NoProfile -ExecutionPolicy Bypass -File ci\\coverage-gate.ps1 -Report app/build/reports/coverage/test/debug/report.xml -Min 10'
-					recordCoverage(
-						tools: [[parser: 'JACOCO', pattern:
-						'app/build/reports/coverage/test/debug/report.xml']],
-						sourceCodeRetention: 'NEVER'
-					)
+					steps {
+						bat 'powershell -NoProfile -ExecutionPolicy Bypass -File ci\\coverage-gate.ps1 -Report app/build/reports/coverage/test/debug/report.xml -Min 10'
+						recordCoverage(
+							tools: [[parser: 'JACOCO', pattern:
+							'app/build/reports/coverage/test/debug/report.xml']],
+							sourceCodeRetention: 'NEVER'
+						)
+					}
 				}
 			}
 		}
