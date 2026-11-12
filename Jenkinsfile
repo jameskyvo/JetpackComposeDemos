@@ -104,7 +104,7 @@ pipeline {
 					usernamePassword(credentialsId: 'android-key', usernameVariable: 'KEY_ALIAS',
 					passwordVariable: 'KEY_PASSWORD')
 				]) {
-					"${GRADLE} assembleRelease"
+					bat "${GRADLE} assembleRelease"
 				}
 				script {
 					env.APK_NAME = "jetpackdemos-${env.BUILD_NUMBER}--${(env.GIT_COMMIT ?: 'local').take(7)}.apk"
